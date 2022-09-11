@@ -10,4 +10,5 @@
     <color name="color_number_pokemon">#919191</color>
     <color name="pokemon_name">#313131</color>
     <color name="back_pokemon">#fd7d24</color>
+    <color name="normal_pokemon">#A4ACAF</color>
 </resources>

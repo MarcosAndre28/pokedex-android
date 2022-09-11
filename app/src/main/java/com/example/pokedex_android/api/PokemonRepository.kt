@@ -1,7 +1,35 @@
 package com.example.pokedex_android.api
 
-import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedex_android.domain.Pokemon
+import PokemonApiResult
+import PokemonsApiResult
+import android.util.Log
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class PokemonRepository{
+object PokemonRepository{
+    private val service: PokemonService
+    init {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://pokeapi.co/api/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+         service = retrofit.create(PokemonService::class.java)
+    }
+
+    fun listPokemons(limit: Int = 151): PokemonsApiResult? {
+        val call = service.listPokemons(limit)
+
+        return call.execute().body()
+    }
+
+    fun getPokemon(number: Int): PokemonApiResult? {
+        val call = service.getPokemon(number)
+
+        return call.execute().body()
+    }
 }
+
